@@ -52,15 +52,3 @@ end
 persons.each do |key, value|
   puts "Information: #{key}, #{value}"
 end
-
-#print "Input name: "
-#persons name = gets.chomp
-
-#print"Input age: "
-#age = gets.chomp.to_i
-
-#print "Input Field: "
-#field = gets.chomp
-
-#print "Input National ID: "
-#national_id = gets.chomp.to_i
