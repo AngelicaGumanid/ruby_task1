@@ -22,33 +22,70 @@ persons =
     {name: "Ziana", age: 25, field: "Mechanical Engineer", national_id: 737378347},
   ]
 
+# DISPLAY ARRAY
 persons.each do |key, value|
   puts "Information: #{key}, #{value}"
 end
 
-puts "\nADD A NEW USER\n"
+# ADD USER LOGIC
+def add_user(persons)
+  print "Input a National ID: "
+  add_national_id = gets.chomp.to_i
 
-print "Input a National ID: "
-new_national_id = gets.chomp.to_i
+  if persons.any? { |person| person[:national_id] == add_national_id }
+    puts "\nFailed to add: National ID already exists."
+  else
+    print "Input name: "
+    new_name = gets.chomp
 
-if persons.any? { |person| person[:national_id] == new_national_id }
-  puts "\n11654631Failed to add: National ID already exists."
+    print "Input age: "
+    new_age = gets.chomp.to_i
+
+    print "Input field: "
+    new_field = gets.chomp
+
+    persons.unshift{{national_id: add_national_id, name: new_name, age: new_age, field: new_field}}
+
+    puts "\nUser added successfully!"
+  end
+
+  display_result(persons)
+
+end
+
+# DELETE USER LOGIC
+def delete_user(persons)
+  print "Enter National ID to delete: "
+  del_national_id = gets.chomp.to_i
+
+  index = persons.find_index { |person| person[:national_id] == del_national_id }
+
+  if index.nil?
+    puts "User not found."
+  else
+    persons.delete_at(index)
+    print "\nSuccessfully deleted."
+  end
+
+  display_result(persons)
+
+end
+
+# DISPLAY RESULT, APPEAR TO TOP
+def display_result(persons)
+  puts "\nUpdate list of people: "
+  persons.each {| person | puts person}
+end
+
+# MAIN
+print "\nDo you want to add or delete a user? "
+choose = gets.chomp
+
+if choose == "add"
+  add_user(persons)
+elsif choose == "delete"
+  delete_user(persons)
 else
-  print "Input name: "
-  new_name = gets.chomp
-
-  print "Input age: "
-  new_age = gets.chomp.to_i
-
-  print "Input field: "
-  new_field = gets.chomp
-
-  persons << {national_id: new_national_id, name: new_name, age: new_age, field: new_field }
-
-  puts "\nUser added successfully!"
-
+  puts "Invalid!"
 end
 
-persons.each do |key, value|
-  puts "Information: #{key}, #{value}"
-end
