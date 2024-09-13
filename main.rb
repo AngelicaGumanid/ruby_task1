@@ -36,15 +36,15 @@ def add_user(persons)
     puts "\nFailed to add: National ID already exists."
   else
     print "Input name: "
-    new_name = gets.chomp
+    add_name = gets.chomp
 
     print "Input age: "
-    new_age = gets.chomp.to_i
+    add_age = gets.chomp.to_i
 
     print "Input field: "
-    new_field = gets.chomp
+    add_field = gets.chomp
 
-    persons.unshift{{national_id: add_national_id, name: new_name, age: new_age, field: new_field}}
+    persons.unshift({name: add_name, age: add_age, field: add_field, national_id: add_national_id,})
 
     puts "\nUser added successfully!"
   end
@@ -78,14 +78,22 @@ def display_result(persons)
 end
 
 # MAIN
-print "\nDo you want to add or delete a user? "
-choose = gets.chomp
 
-if choose == "add"
-  add_user(persons)
-elsif choose == "delete"
-  delete_user(persons)
-else
-  puts "Invalid!"
+loop do
+  print "\nDo you want to add_user, delete_user a user or exit? "
+  choose = gets.chomp
+
+  if choose == "add_user"
+    add_user(persons)
+  elsif choose == "delete_user"
+    delete_user(persons)
+  elsif choose == "exit"
+    puts "Exiting the program"
+    break
+  else
+    puts "Invalid!"
+  end
 end
+
+
 
